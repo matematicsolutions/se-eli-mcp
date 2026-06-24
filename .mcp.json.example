@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "se-eli-mcp": {
+      "command": "se-eli-mcp",
+      "env": {
+        "SE_ELI_BASE_URL": "https://data.riksdagen.se",
+        "SE_ELI_CACHE_DIR": "~/.matematic/cache/se-eli",
+        "SE_ELI_AUDIT_DIR": "~/.matematic/audit"
+      }
+    }
+  }
+}

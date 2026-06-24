@@ -1,0 +1,4 @@
+{
+  "_comment": "pubgate:allow - Public Riksdagen SFS open-data test fixtures only. Swedish statute metadata (data.riksdagen.se) is public legislation data, not client PII or Polish company numbers; some numeric identifiers coincidentally match the NIP checksum heuristic. No secrets or client data are present in these fixtures.",
+  "allow_paths": ["tests/fixtures/"]
+}
