@@ -1,5 +1,7 @@
 # se-eli-mcp
 
+<!-- mcp-name: io.github.matematicsolutions/se-eli-mcp -->
+
 An MCP server for **Swedish statutes (SFS, Svensk författningssamling)**, served as open data
 by the **Riksdagen** (parliament) at `data.riksdagen.se` (keyless). It gives an AI agent the
 **consolidated** text of an act with a verifiable citation: a persistent identifier, a
