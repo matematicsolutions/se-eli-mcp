@@ -2,6 +2,23 @@
 
 <!-- mcp-name: io.github.matematicsolutions/se-eli-mcp -->
 
+
+## Instalacja (jedna komenda)
+
+Opublikowany na PyPI + MCP Registry (`io.github.matematicsolutions/se-eli-mcp`). Uruchomienie bez klonowania:
+
+```bash
+uvx se-eli-mcp
+```
+
+Konfiguracja klienta MCP (stdio):
+
+```json
+{ "mcpServers": { "se-eli-mcp": { "command": "uvx", "args": ["se-eli-mcp"] } } }
+```
+
+(Budowanie ze źródeł — niżej.)
+
 An MCP server for **Swedish statutes (SFS, Svensk författningssamling)**, served as open data
 by the **Riksdagen** (parliament) at `data.riksdagen.se` (keyless). It gives an AI agent the
 **consolidated** text of an act with a verifiable citation: a persistent identifier, a
