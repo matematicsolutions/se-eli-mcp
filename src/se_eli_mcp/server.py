@@ -27,6 +27,7 @@ from .citations import (
     parse_status,
     status_inline_text,
 )
+from . import runtime
 from .client import DEFAULT_BASE_URL, RiksdagenClient, SeError
 from .models import LawText, SearchResult, SfsAct
 
@@ -88,7 +89,7 @@ mcp: FastMCP = FastMCP(name="se-eli-mcp", instructions=INSTRUCTIONS)
 
 
 def _base_url() -> str:
-    return os.environ.get("SE_ELI_BASE_URL", DEFAULT_BASE_URL).rstrip("/")
+    return os.environ.get("SE_ELI_BASE_URL", runtime.base_url("eli", DEFAULT_BASE_URL)).rstrip("/")
 
 
 def _audit() -> AuditLogger:
