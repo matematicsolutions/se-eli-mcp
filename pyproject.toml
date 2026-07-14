@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "se-eli-mcp"
-version = "0.1.0"
+version = "0.2.0"
 description = "MCP server for Swedish statutes (SFS) via the Riksdagen open-data API — fetch consolidated acts with persistent identifiers and verifiable citations."
 readme = "README.md"
 license = { text = "Apache-2.0" }
