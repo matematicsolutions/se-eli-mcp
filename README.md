@@ -62,6 +62,7 @@ member state, the same citation contract everywhere.
 | `se_search(query)` | Free-text search over SFS statutes (title and full text). Returns acts, each with the citation contract. |
 | `se_get_act(sfs_number)` | Metadata for one act by its SFS number (e.g. `2018:218`) — title, authority, date, consolidation marker. |
 | `se_get_text(sfs_number)` | The full consolidated plain text of one act. |
+| `se_coverage()` | Declare what this connector covers, when each family was captured, and - explicitly - what it does NOT cover. Every gap carries a fallback. |
 
 Every response carries the **citation contract**:
 
