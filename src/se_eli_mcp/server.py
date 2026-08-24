@@ -43,6 +43,7 @@ This MCP server exposes Swedish statutes (SFS, Svensk forfattningssamling) throu
 
 ## Hard constraints
 
+- **Do not answer past the edge of this corpus** - when a search comes back empty, or the question touches material this connector does not carry, call `se_coverage` and relay what it says is missing. Absence here is not absence in the law.
 - **eli_uri is the citability key, but Sweden does NOT publish native ELI (/eli/) URIs.** `eli_uri` therefore carries the official persistent document identifier (`https://data.riksdagen.se/dokument/<dok_id>`), and the SFS number is the canonical citation. Never fabricate a `/eli/` URI.
 - **Cite the SFS number** - Swedish law is cited as "SFS 2018:218"; the act title already embeds it.
 - **Every response has `human_readable_citation` + `source_url`** - cite both to the user.
