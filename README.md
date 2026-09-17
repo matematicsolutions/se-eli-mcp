@@ -99,7 +99,7 @@ Register it with your MCP client (see `.mcp.json.example`):
 - **Public data only.** Read-only against the keyless Riksdagen open-data API; nothing is sent
   beyond the query / SFS number.
 - **Audit log.** Every call appends one JSON line to `~/.matematic/audit/se-eli-mcp.jsonl`
-  (AI Act art. 12 record-keeping).
+  (record-keeping).
 - **Vendor-neutral.** No LLM provider, no telemetry; own backoff + on-disk cache.
 - **No fabrication.** Identifiers and titles are parsed from the source record. If Riksdagen's
   schema changes, the connector fails loudly rather than returning stale or invented data.
