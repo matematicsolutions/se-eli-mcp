@@ -1,0 +1,615 @@
+{
+  "package_version": "0.3.3",
+  "tools": {
+    "se_coverage": {
+      "descriptor": {
+        "annotations": {
+          "destructiveHint": false,
+          "idempotentHint": true,
+          "openWorldHint": true,
+          "readOnlyHint": true
+        },
+        "description": "Declare what this connector covers, how it is sourced, and what it does NOT cover.\n\nCall this before telling a user that the law \"does not contain\" something, and whenever\na search comes back empty: the absence may be a gap in this connector rather than in the\nlaw. Every gap carries a fallback saying where to look instead.\n\nReturns:\n    ``Coverage`` with families, an as-of note, and a non-empty list of known gaps.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {},
+          "type": "object"
+        },
+        "meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        },
+        "name": "se_coverage",
+        "outputSchema": {
+          "additionalProperties": true,
+          "description": "What this connector covers, how it is sourced, and what it does not cover.",
+          "properties": {
+            "as_of_note": {
+              "description": "States what the dates mean, and what they do not promise.",
+              "type": "string"
+            },
+            "families": {
+              "items": {
+                "additionalProperties": true,
+                "description": "One data family this connector exposes.",
+                "properties": {
+                  "captured_at": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "description": "Date this family was last captured (ISO). None when queried live."
+                  },
+                  "live": {
+                    "default": true,
+                    "description": "True when queried live instead of from a snapshot.",
+                    "type": "boolean"
+                  },
+                  "name": {
+                    "description": "Data family, e.g. 'Federal legislation'.",
+                    "type": "string"
+                  },
+                  "source": {
+                    "description": "Official source the data comes from.",
+                    "type": "string"
+                  },
+                  "tool": {
+                    "description": "Tool or tools that reach this family.",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name",
+                  "tool",
+                  "source"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "known_gaps": {
+              "description": "Never empty. An empty list would mean 'not checked', not 'no gaps'.",
+              "items": {
+                "additionalProperties": true,
+                "description": "A known, named hole in this connector's coverage - plus the way around it.",
+                "properties": {
+                  "fallback": {
+                    "description": "Where to go instead.",
+                    "type": "string"
+                  },
+                  "family": {
+                    "description": "Which family the gap belongs to.",
+                    "type": "string"
+                  },
+                  "id": {
+                    "description": "Stable gap identifier.",
+                    "type": "string"
+                  },
+                  "missing": {
+                    "description": "What is NOT available through this connector.",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id",
+                  "family",
+                  "missing",
+                  "fallback"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "status": {
+              "default": "ok",
+              "enum": [
+                "ok",
+                "degraded",
+                "failed"
+              ],
+              "type": "string"
+            }
+          },
+          "required": [
+            "as_of_note"
+          ],
+          "type": "object"
+        }
+      },
+      "sha256": "88dfa894a8e55489ffe1c64b7c8c73086027eec20be54803fcbd43c0e05c8136"
+    },
+    "se_get_act": {
+      "descriptor": {
+        "annotations": {
+          "destructiveHint": false,
+          "idempotentHint": true,
+          "openWorldHint": true,
+          "readOnlyHint": true
+        },
+        "description": "Fetch metadata for a Swedish statute by its SFS number.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "sfs_number": {
+              "description": "e.g. ``\"2018:218\"``.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "sfs_number"
+          ],
+          "type": "object"
+        },
+        "meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        },
+        "name": "se_get_act",
+        "outputSchema": {
+          "additionalProperties": true,
+          "description": "A Swedish statute (SFS), parsed from a Riksdagen document record.",
+          "properties": {
+            "authority": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "consolidated_through": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "date_issued": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "dok_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "eli_uri": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "human_readable_citation": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "sfs_number": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "source_url": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "text_url": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "title": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "year": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            }
+          },
+          "type": "object"
+        }
+      },
+      "sha256": "fa7478af33a72909a608ff332e9f0a96871538732991aad696e24c606d53024f"
+    },
+    "se_get_text": {
+      "descriptor": {
+        "annotations": {
+          "destructiveHint": false,
+          "idempotentHint": true,
+          "openWorldHint": true,
+          "readOnlyHint": true
+        },
+        "description": "Fetch the full consolidated plain text of a Swedish statute by its SFS number.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "sfs_number": {
+              "description": "e.g. ``\"2018:218\"``.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "sfs_number"
+          ],
+          "type": "object"
+        },
+        "meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        },
+        "name": "se_get_text",
+        "outputSchema": {
+          "additionalProperties": true,
+          "description": "Result of ``se_get_text`` (full consolidated plain text).",
+          "properties": {
+            "byte_size": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "consolidated_through": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "content": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "dataset_note": {
+              "default": "SFS (Svensk forfattningssamling) is the official collection of Swedish statutes, served as open data by the Riksdagen (parliament) at data.riksdagen.se. Riksdagen publishes the consolidated text of each act (amendments incorporated up to the 'andrad t.o.m.' marker). Sweden does NOT publish native ELI (/eli/) URIs - eli_uri carries the official persistent document identifier (the data.riksdagen.se/dokument URI) and the SFS number is the canonical citation. This MVP covers statutes (doktyp=SFS); case law is not covered here.",
+              "type": "string"
+            },
+            "dok_id": {
+              "type": "string"
+            },
+            "eli_uri": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "format": {
+              "default": "sfs-plain-text",
+              "type": "string"
+            },
+            "human_readable_citation": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "sfs_number": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "source_url": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "text_url": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            }
+          },
+          "required": [
+            "dok_id"
+          ],
+          "type": "object"
+        }
+      },
+      "sha256": "308ef039b7529ceec1465c64fa1809d9510503e9738390bb4615d3becc413e20"
+    },
+    "se_search": {
+      "descriptor": {
+        "annotations": {
+          "destructiveHint": false,
+          "idempotentHint": true,
+          "openWorldHint": true,
+          "readOnlyHint": true
+        },
+        "description": "Search Swedish statutes (SFS) by free text (title and full text).",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "query": {
+              "description": "e.g. ``\"dataskydd\"``.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "query"
+          ],
+          "type": "object"
+        },
+        "meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        },
+        "name": "se_search",
+        "outputSchema": {
+          "additionalProperties": true,
+          "description": "Result of ``se_search``.",
+          "properties": {
+            "dataset_note": {
+              "default": "SFS (Svensk forfattningssamling) is the official collection of Swedish statutes, served as open data by the Riksdagen (parliament) at data.riksdagen.se. Riksdagen publishes the consolidated text of each act (amendments incorporated up to the 'andrad t.o.m.' marker). Sweden does NOT publish native ELI (/eli/) URIs - eli_uri carries the official persistent document identifier (the data.riksdagen.se/dokument URI) and the SFS number is the canonical citation. This MVP covers statutes (doktyp=SFS); case law is not covered here.",
+              "type": "string"
+            },
+            "items": {
+              "items": {
+                "additionalProperties": true,
+                "description": "A Swedish statute (SFS), parsed from a Riksdagen document record.",
+                "properties": {
+                  "authority": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null
+                  },
+                  "consolidated_through": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null
+                  },
+                  "date_issued": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null
+                  },
+                  "dok_id": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null
+                  },
+                  "eli_uri": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null
+                  },
+                  "human_readable_citation": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null
+                  },
+                  "sfs_number": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null
+                  },
+                  "source_url": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null
+                  },
+                  "text_url": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null
+                  },
+                  "title": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null
+                  },
+                  "year": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "query": {
+              "type": "string"
+            },
+            "returned": {
+              "type": "integer"
+            },
+            "total_matched": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "query",
+            "total_matched",
+            "returned"
+          ],
+          "type": "object"
+        }
+      },
+      "sha256": "8c680506fc68342067d84c2ddb39f0cc6dd2b685725ccfce62f67b62fcf2a03b"
+    }
+  },
+  "toolset_sha256": "b0bee687f13b5d6eaef66d98877fc2c00145ae7c151a3ff5f46d3418daf812c1"
+}
