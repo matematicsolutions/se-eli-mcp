@@ -5,6 +5,14 @@
 
 ## Install (one command)
 
+As a Claude plugin (Claude Code or the desktop app, needs [uv](https://docs.astral.sh/uv/));
+see [plugin/README.md](plugin/README.md) for what it sends and stores:
+
+```
+/plugin marketplace add matematicsolutions/se-eli-mcp
+/plugin install se-eli-mcp@se-eli-mcp
+```
+
 Published on PyPI + MCP Registry (`io.github.matematicsolutions/se-eli-mcp`). Run without cloning:
 
 ```bash
@@ -100,7 +108,12 @@ Register it with your MCP client (see `.mcp.json.example`):
   beyond the query / SFS number.
 - **Audit log.** Every call appends one JSON line to `~/.matematic/audit/se-eli-mcp.jsonl`
   (record-keeping).
-- **Vendor-neutral.** No LLM provider, no telemetry; own backoff + on-disk cache.
+- **Network** - the server talks to the official source(s) named above and the local
+  filesystem. Once, on first use, it also fetches a small configuration file
+  (`se-runtime.json.gz`, updated source addresses) from this repository's GitHub Releases.
+  That request carries no query content; GitHub's download counter for the file is the only
+  usage signal we see. `SE_ELI_RUNTIME_URL=""` turns it off; the Claude plugin ships
+  with it off. No LLM provider, no other telemetry. Own backoff + on-disk cache.
 - **No fabrication.** Identifiers and titles are parsed from the source record. If Riksdagen's
   schema changes, the connector fails loudly rather than returning stale or invented data.
 
